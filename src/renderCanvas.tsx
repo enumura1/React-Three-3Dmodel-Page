@@ -4,15 +4,12 @@ import { OrbitControls } from 'three/examples/jsm/Addons.js';
 // シーンの作成
 const createScene = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
     const sizes = {
-      width: window.innerWidth * 0.95,
-      height: window.innerHeight * 0.85,
+      width: window.innerWidth,
+      height: window.innerHeight,
     };
 
     // シーン
     const scene = new THREE.Scene();
-
-    // ユーザ（ワイヤーフレームの球体）
-    //createUserParticles(scene,3);
 
     // ライト
     const color = 0xFFFFFF; // 光の色
@@ -61,6 +58,9 @@ const createScene = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
       canvas: canvasRef.current!,
     });
     renderer.setSize(sizes.width, sizes.height);
+
+    // 背景色を水色に設定
+    renderer.setClearColor('#7DBDFF');
 
     return {  scene, camera, renderer };
 };
