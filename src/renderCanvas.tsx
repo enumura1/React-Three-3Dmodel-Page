@@ -46,6 +46,7 @@ const createScene = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
     // カメラコントローラーを作成
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const controls = new OrbitControls(camera, canvasRef.current!);
+    controls.enableDamping = true
   
 
     const divisions = 10;

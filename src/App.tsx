@@ -5,6 +5,7 @@ import createScene from './renderCanvas';
 
 const App = () => {
 
+  // canvasを扱う、DOMを扱うから初期値null
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -21,16 +22,15 @@ const App = () => {
 
       // カメラの位置を設定
       camera.position.set(0, 1, 5);
-      //camera.lookAt(0, 3, 0);
 
-      // レンダリングループ
+      // シーンの更新
       const animate = () => {
         requestAnimationFrame(animate);
+
         // モデルの回転
         if (model) {
           model.rotation.y += 0.001;
         }
-
         renderer.render(scene, camera);
       };
       animate();
