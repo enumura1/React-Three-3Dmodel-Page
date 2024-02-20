@@ -12,21 +12,21 @@ const createScene = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
     const scene = new THREE.Scene();
 
     // ライト
-    const color = 0xFFFFFF; // 光の色
-    const intensity = 300; // 光の強度
-    const distance = 300; // 光の有効範囲（距離）
-    const decay = 2; // 減衰率
+    const color = 0xFFFFFF; 
+    const intensity = 300;
+    const distance = 300;
+    const decay = 2;
 
     // 立方体の頂点座標を計算
     const vertices = [
-        new THREE.Vector3(-3, -3, -3), // 0
-        new THREE.Vector3(3, -3, -3),  // 1
-        new THREE.Vector3(3, 3, -3),   // 2
-        new THREE.Vector3(-3, 3, -3),  // 3
-        new THREE.Vector3(-3, -3, 3),  // 4
-        new THREE.Vector3(3, -3, 3),   // 5
-        new THREE.Vector3(3, 3, 3),    // 6
-        new THREE.Vector3(-3, 3, 3)    // 7
+        new THREE.Vector3(-3, -3, -3), 
+        new THREE.Vector3(3, -3, -3),  
+        new THREE.Vector3(3, 3, -3),   
+        new THREE.Vector3(-3, 3, -3),  
+        new THREE.Vector3(-3, -3, 3),  
+        new THREE.Vector3(3, -3, 3),   
+        new THREE.Vector3(3, 3, 3),    
+        new THREE.Vector3(-3, 3, 3)    
     ];
 
     // ポイントライトを頂点の位置に配置
@@ -36,19 +36,16 @@ const createScene = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
         scene.add(light);
     }
 
-
     // カメラ
     const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
     camera.position.set(0, 1, 5);
     scene.add(camera);
 
-    // カメラコントローラーを作成
     const controls = new OrbitControls(camera, canvasRef.current!);
     controls.enableDamping = true
-  
-
-    const divisions = 10;
-    const gridHelper = new THREE.GridHelper( 20, divisions );
+    
+    // ヘルパー
+    const gridHelper = new THREE.GridHelper( 20, 10 );
     gridHelper.position.set(0,-1,0);
     scene.add( gridHelper );
 
