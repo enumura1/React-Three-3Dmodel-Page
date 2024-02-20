@@ -15,7 +15,7 @@ const App = () => {
     // モデルの読み込み
     let model: THREE.Object3D;
     const loader = new GLTFLoader();
-    loader.load('assets/earth.glb', (gltf) => {
+    loader.load('assets/earth2.glb', (gltf) => {
       model = gltf.scene;
       model.position.set(0,-1,0);
       scene.add(model);

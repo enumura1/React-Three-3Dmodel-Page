@@ -15,27 +15,26 @@ const createScene = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
     const color = 0xFFFFFF; // 光の色
     const intensity = 300; // 光の強度
     const distance = 300; // 光の有効範囲（距離）
-    const decay = 3; // 減衰率
+    const decay = 2; // 減衰率
 
-    const numLights = 9; // ライトの数
-    const radius = 3; // ライトの配置半径
+    // 立方体の頂点座標を計算
+    const vertices = [
+        new THREE.Vector3(-3, -3, -3), // 0
+        new THREE.Vector3(3, -3, -3),  // 1
+        new THREE.Vector3(3, 3, -3),   // 2
+        new THREE.Vector3(-3, 3, -3),  // 3
+        new THREE.Vector3(-3, -3, 3),  // 4
+        new THREE.Vector3(3, -3, 3),   // 5
+        new THREE.Vector3(3, 3, 3),    // 6
+        new THREE.Vector3(-3, 3, 3)    // 7
+    ];
 
-    // ライトを配置するためのグループを作成
-    const lightsGroup = new THREE.Group();
-
-    // xy平面とz軸方向の両方に6つのポイントライトを均等に配置
-    for (let i = 0; i < numLights; i++) {
-      const angle = (Math.PI * 2) / numLights * i;
-      const x = Math.cos(angle) * radius;
-      const y = Math.sin(angle) * radius;
-      const z = (i % 2 === 0) ? radius : -radius; // 偶数番目のライトは+z軸方向、奇数番目のライトは-z軸方向
-
-      const light = new THREE.PointLight(color, intensity, distance, decay);
-      light.position.set(x, y, z);
-      lightsGroup.add(light);
+    // ポイントライトを頂点の位置に配置
+    for (const vertex of vertices) {
+        const light = new THREE.PointLight(color, intensity, distance, decay);
+        light.position.copy(vertex);
+        scene.add(light);
     }
-
-    scene.add(lightsGroup);
 
 
     // カメラ
@@ -44,7 +43,6 @@ const createScene = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
     scene.add(camera);
 
     // カメラコントローラーを作成
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const controls = new OrbitControls(camera, canvasRef.current!);
     controls.enableDamping = true
   
@@ -61,7 +59,7 @@ const createScene = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
     renderer.setSize(sizes.width, sizes.height);
 
     // 背景色を水色に設定
-    renderer.setClearColor('#7DBDFF');
+    renderer.setClearColor('#001021');
 
     return {  scene, camera, renderer };
 };
