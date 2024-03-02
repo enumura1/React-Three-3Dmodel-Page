@@ -29,7 +29,7 @@ const createScene = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
         new THREE.Vector3(-3, 3, 3)    
     ];
 
-    // ポイントライトを頂点の位置に配置
+    // ポイントライトを立方体の頂点の位置に配置
     for (const vertex of vertices) {
         const light = new THREE.PointLight(color, intensity, distance, decay);
         light.position.copy(vertex);
